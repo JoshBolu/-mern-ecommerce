@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { LogIn, Loader, ArrowRight } from 'lucide-react'
 
 import loginInputFieldData from '../data/loginInputFieldData'
-import InputFields from '../components/inputFields'
+import InputFields from '../components/InputFields'
 
 import { useUserStore } from '../stores/useUserStore'
 

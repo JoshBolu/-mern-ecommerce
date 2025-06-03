@@ -6,7 +6,7 @@ import { UserPlus, ArrowRight, Loader } from "lucide-react";
 
 
 import inputFieldData from "../data/signUpInputFieldData";
-import InputFields from "../components/inputFields";
+import InputFields from "../components/InputFields";
 import { useUserStore } from "../stores/useUserStore";
 
 const SignUpPage = () => {

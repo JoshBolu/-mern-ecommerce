@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { PlusCircle, Loader } from 'lucide-react'
 
 import createProductInputFieldData from '../data/createProductInputFieldData';
-import InputFields from './inputFields';
+import InputFields from './InputFields';
 
 import { useProductStore } from '../stores/useProductStore';
 
@@ -12,6 +12,8 @@ const categories = ["jeans", "t-shirts", "shoes", "glasses", "jackets", "suits",
 const CreateProduct = () => {
 
     const { loading, createProduct } = useProductStore()
+
+    const fileInputRef = useRef(null)
 
     const [newProduct, setNewProduct] = useState({
         name: "",
@@ -25,7 +27,10 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await createProduct(newProduct)
-        setNewProduct({name: "", description: "", price: "", inStock: "", category: "", image: ""})
+        setNewProduct({name: "", description: "", price: "", inStock: "", category: ""})
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
     }
 
     const handleFormData = (e) => {
@@ -59,7 +64,10 @@ const CreateProduct = () => {
                 value={newProduct[field.htmlFor]} 
                 placeholder={field.placeholder}
                 onChange={field.type === "file"? handleImageChange : handleFormData}  
-                categories={categories}  />
+                categories={categories}
+                inputRef={field.type === "file"? fileInputRef : undefined } // pass ref only for file input  
+                />
+                
         )
     })
 
