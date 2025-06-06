@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import path from "path"
+import path from "node:path"
 dotenv.config();
 
 import express from "express";
@@ -52,7 +52,7 @@ app.use('/api/v1/analytics', protectRoute, analyticsRoutes)
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, "frontend/dist")))
 
-  app.get("/:path*", (req, res) => {
+  app.get("/*splat", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
   })
 }
