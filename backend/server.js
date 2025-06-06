@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import path from "node:path"
+import path from "path"
 dotenv.config();
 
 import express from "express";
