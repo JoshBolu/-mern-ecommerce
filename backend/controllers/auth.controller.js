@@ -75,7 +75,7 @@ export const login = async(req, res) => {
             } , message: "User logged in successfully"});   
         }
         else{
-            res.status(StatusCodes.UNAUTHORIZED).json({message: "Invalid email or password"})
+            res.status(StatusCodes.BAD_REQUEST).json({message: "Invalid email or password"})
         } 
     }
     catch(err){

@@ -31,7 +31,16 @@ app.use(rateLimiter({
   windowMs: 15*60*1000, //15 minutes, default is in milliseconds
   max: 200, // limit each IP to 100 requests per windowMs
 }))
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+      },
+    },
+  })
+);
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true, // allow credentials (cookies) to be sent with requests
