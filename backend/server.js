@@ -36,11 +36,23 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+        scriptSrc: ["'self'", "https://js.stripe.com"], // allow Stripe JS
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://res.cloudinary.com",
+          "https://*.stripe.com",
+        ], // Stripe also loads images
+        frameSrc: [
+          "'self'",
+          "https://js.stripe.com",
+          "https://hooks.stripe.com",
+        ], // Stripe embeds iframes for checkout
       },
     },
   })
 );
+
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true, // allow credentials (cookies) to be sent with requests
